@@ -25,22 +25,15 @@ def produtos(v1,c1):
         desconto_c = 0
         c1 = False
 
+    valores = {
+        "data_processamento": dt.datetime.now().strftime("%d/%m/%Y %H:%M:%S"),
+        "valor_original": v1,
+        "total_desconto": desconto + desconto_c,
+        "desconto_percentual": desconto,
+        "desconto_cupom_primeira_compra": desconto_c,
+        "valor_final": v1 - (desconto + desconto_c)
+    }
 
-
-    if c1 == True:
-        valores = {
-            "data_processamento": dt.datetime.now().strftime("%d/%m/%Y %H:%M:%S"),
-            "valor_original": v1,
-            "total_desconto": desconto + desconto_c,
-            "valor_final": v1 - (desconto + desconto_c)
-        }
-    elif c1 == False:
-        valores = {
-            "data_processamento": dt.datetime.now().strftime("%d/%m/%Y %H:%M:%S"),
-            "valor_original": v1,
-            "total_desconto": desconto,
-            "valor_final": v1 - (desconto + desconto_c)
-        }
     return jsonify(valores)
 
 
