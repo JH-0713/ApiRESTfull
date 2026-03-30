@@ -27,18 +27,28 @@ def home():
 #     elif v1 >= 501:
 #         desconto = (v1 * 10) / 100
 #
+#     vfinal1 = v1 - desconto
 #     if c1 == 'true' or c1 == 'True' or c1 == "SIM" or c1 == 'Sim' or c1 == 'sim':
-#         desconto_c = 25
+#         if vfinal1 >= 50:
+#             desconto_c = 25
+#         else:
+#             desconto_c = 0
 #     elif c1 == 'false' or c1 == 'False' or c1 == '' or c1 is None:
 #         desconto_c = 0
+#
+#     td1 = desconto + desconto_c
+#     vf1 = v1 - td1
+#
+#
+#
 #
 #     valores = {
 #         "data_processamento": dt.datetime.now().strftime("%d/%m/%Y %H:%M:%S"),
 #         "valor_original": v1,
-#         "total_desconto": desconto + desconto_c,
+#         "total_desconto": td1,
 #         "desconto_percentual": desconto,
 #         "desconto_cupom_primeira_compra": desconto_c,
-#         "valor_final": v1 - (desconto + desconto_c)
+#         "valor_final": vf1
 #     }
 #
 #     return jsonify(valores)
@@ -49,7 +59,7 @@ def produto():
         API para calcular o valor do produto com desconto dependendo do seu preço
 
         ## Endpoint:
-        GET /ver_produto
+        GET /produto
 
         ## Parâmetros:
 
@@ -83,11 +93,14 @@ def produto():
         elif v1 >= 501:
             desconto = (v1 * 10) / 100
 
+        vf1 = v1 - desconto
         if c1 == 'true' or c1 == 'True' or c1 == "SIM" or c1 == 'Sim' or c1 == 'sim':
-            desconto_c = 25
+            if vf1 <= 50:
+                desconto_c = 25
+            else:
+                desconto_c = 0
         elif c1 == 'false' or c1 == 'False' or c1 == '' or c1 is None:
             desconto_c = 0
-
 
         dados = {
         "data_processamento": dt.datetime.now().strftime("%d/%m/%Y %H:%M:%S"),
@@ -108,8 +121,6 @@ def produto():
         }
 
         return jsonify(dados),400
-
-
 
 
 
